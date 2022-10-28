@@ -27,4 +27,15 @@ parameters = {
 response = requests.post(url=exercise_endpoint, json=parameters, headers=header)
 response.raise_for_status()
 result = response.json()
-print(result)
+print(result, len(result["exercises"]))
+
+#Making requests on sheety
+projectName = "myWorkouts"
+sheetName = "workouts"
+
+sheety_API_URL = "https://api.sheety.co/10fce03195300cfd5c84ea323144da6f/"+projectName+"/"+sheetName
+sheety_response = requests.get(url=sheety_API_URL)
+sheety_response.raise_for_status()
+sheety_result = sheety_response.json()
+print(sheety_result)
+
