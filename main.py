@@ -1,11 +1,12 @@
 import requests
 from datetime import datetime
+import os
+
+APP_ID = os.environ["NT_APP_ID"]
+API_KEY = os.environ["NT_API_KEY"]
 
 # PART 1: getting data from the API nutritionix
 #------------------------------------------------------------------------------------------------------
-APP_ID = "6f0d5b5b"
-API_KEY = "ee9c92be749ce50e3eb1f779def831e9"
-
 header = {
     "x-app-id": APP_ID,
     'x-app-key': API_KEY
@@ -39,9 +40,10 @@ print(result, len(result["exercises"]))
 projectName = "myWorkouts"
 sheetName = "workouts"
 bearer_headers = {
-"Authorization": "Bearer IBOjg2kf5C4ct72NrCmtSjcGAjnchIcv"
+"Authorization": f"Bearer {os.environ['TOKEN']}"
 }
-sheety_API_URL = "https://api.sheety.co/10fce03195300cfd5c84ea323144da6f/"+projectName+"/"+sheetName
+sheety_API_URL = os.environ["SHEET_ENDPOINT"]
+#sheety_API_URL = "https://api.sheety.co/10fce03195300cfd5c84ea323144da6f/"+projectName+"/"+sheetName
 sheety_response = requests.get(url=sheety_API_URL, headers=bearer_headers)
 sheety_response.raise_for_status()
 sheety_result = sheety_response.json()
